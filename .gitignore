@@ -1,0 +1,13 @@
+# Source video archives are intentionally kept out of the public repository.
+/zip/
+/video/
+
+# Local contact sheets and Python caches.
+/_contact/
+__pycache__/
+*.py[cod]
+
+# Local development output.
+/_site/
+.DS_Store
+Thumbs.db

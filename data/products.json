@@ -1,0 +1,58 @@
+[
+  {
+    "id": "espresso",
+    "name": "Espresso",
+    "description": "A concentrated shot with a smooth, caramel finish.",
+    "price": 3.5,
+    "category": "Signature",
+    "image": "https://images.unsplash.com/photo-1497636577773-f1231844b336?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "americano",
+    "name": "Americano",
+    "description": "Espresso with added hot water for a mellow body.",
+    "price": 4.25,
+    "category": "Classic",
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "cappuccino",
+    "name": "Cappuccino",
+    "description": "Balanced espresso with equal parts milk and foam.",
+    "price": 5.5,
+    "category": "Classic",
+    "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "latte",
+    "name": "Latte",
+    "description": "Silky milk and espresso with a soft, creamy finish.",
+    "price": 5.75,
+    "category": "Signature",
+    "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "mocha",
+    "name": "Mocha",
+    "description": "Espresso, chocolate, and milk with a velvety finish.",
+    "price": 6.25,
+    "category": "Signature",
+    "image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "cold-brew",
+    "name": "Cold Brew",
+    "description": "Slow-steeped and naturally sweet with a crisp finish.",
+    "price": 5.1,
+    "category": "Cold",
+    "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": "signature-coffee",
+    "name": "Signature Coffee",
+    "description": "A seasonal blend tailored for rich aroma and balance.",
+    "price": 6.5,
+    "category": "Seasonal",
+    "image": "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?auto=format&fit=crop&w=900&q=80"
+  }
+]

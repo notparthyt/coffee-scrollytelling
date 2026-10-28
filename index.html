@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Cinematic coffee story with scroll-driven frame playback and a refined menu."
+    />
+    <title>More Than Coffee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand-wrap">
+        <span class="brand-mark">M</span>
+        <span class="brand-name">More Than Coffee</span>
+      </div>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="#story">Story</a>
+        <a href="#craft">Craft</a>
+        <a href="#menu">Menu</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <button class="nav-cart" type="button" aria-label="Open cart">
+        <span>Cart</span>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </header>
+
+    <main>
+      <section id="hero" class="hero" aria-label="Cinematic coffee story">
+        <div class="hero-canvas-shell">
+          <canvas id="cinematic-canvas" aria-label="Coffee story frames"></canvas>
+
+          <div class="hero-copy">
+            <p class="eyebrow">A little pause. A world of flavour.</p>
+            <h1>More than coffee.</h1>
+            <p class="hero-summary">Warm light, thoughtful craft, and the small rituals that make a day feel better.</p>
+          </div>
+
+          <div id="coffee-overlay" class="coffee-overlay" aria-live="polite">
+            <div class="overlay-card">
+              <p class="eyebrow">The ritual continues</p>
+              <h2>Crafted for slow, beautiful mornings.</h2>
+              <p>
+                A precise pour. A gentle crema. A room that feels like it was made for staying a while.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="story" class="story-section chapter">
+        <div class="section-label">Chapter 01</div>
+        <div class="chapter-grid">
+          <div>
+            <p class="eyebrow accent">The atmosphere</p>
+            <h2>Your moment starts here.</h2>
+          </div>
+          <p>
+            Lean into the room, the natural wood, the warm light, and the hush of a place designed for unhurried conversation.
+          </p>
+        </div>
+      </section>
+
+      <section id="craft" class="story-section chapter alt">
+        <div class="section-label">Chapter 02</div>
+        <div class="chapter-grid">
+          <div>
+            <p class="eyebrow accent">The craft</p>
+            <h2>Crafted with intention.</h2>
+          </div>
+          <p>
+            Every detail matters — the beans, the grind, the pour, the rhythm of the bar. Precision without noise.
+          </p>
+        </div>
+      </section>
+
+      <section class="story-section chapter">
+        <div class="section-label">Chapter 03</div>
+        <div class="chapter-grid">
+          <div>
+            <p class="eyebrow accent">The perfect pour</p>
+            <h2>Every detail matters.</h2>
+          </div>
+          <p>
+            Velvet crema, balanced sweetness, and a cup finished with intention. It is the kind of detail that makes a simple pause feel complete.
+          </p>
+        </div>
+      </section>
+
+      <section class="story-section chapter alt">
+        <div class="section-label">Chapter 04</div>
+        <div class="chapter-grid">
+          <div>
+            <p class="eyebrow accent">The coffee moment</p>
+            <h2>Make time for yourself.</h2>
+          </div>
+          <p>
+            Whether it is a quick reset or a longer ritual, the right cup can transform a day without asking for much at all.
+          </p>
+        </div>
+      </section>
+
+      <section id="menu" class="menu-section">
+        <div class="menu-header">
+          <div>
+            <p class="eyebrow accent">Chapter 05</p>
+            <h2>Discover the menu</h2>
+          </div>
+          <div class="menu-controls">
+            <div class="search-wrap">
+              <label class="sr-only" for="menu-search">Search menu</label>
+              <input id="menu-search" type="search" placeholder="Search drinks" />
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-bar" id="filter-bar" aria-label="Coffee categories"></div>
+        <div id="product-grid" class="product-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="visit" class="visit-section">
+        <div class="visit-card">
+          <p class="eyebrow accent">Visit us</p>
+          <h2>Take a quiet break.</h2>
+          <p>
+            The café experience is best enjoyed in person. Slow coffee, warm light, and gentle conversation — all waiting for your next pause.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <aside id="cart-panel" class="cart-panel" aria-label="Shopping cart">
+      <div class="cart-header">
+        <h3>Your order</h3>
+        <button type="button" class="close-cart" aria-label="Close cart">×</button>
+      </div>
+      <div id="cart-items" class="cart-items"></div>
+      <div class="cart-summary">
+        <div>
+          <span>Subtotal</span>
+          <strong id="cart-subtotal">$0.00</strong>
+        </div>
+      </div>
+    </aside>
+
+    <footer class="site-footer">
+      <div>More Than Coffee</div>
+      <div>Freshly poured, thoughtfully served.</div>
+    </footer>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
