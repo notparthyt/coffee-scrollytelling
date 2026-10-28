@@ -1084,6 +1084,9 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 .footer-socials { display: flex; flex-wrap: wrap; gap: 1rem; }
 .footer-socials a, .footer-top { color: inherit; text-decoration: none; transition: color 0.2s ease; }
 .footer-socials a:hover, .footer-top:hover, .footer-credit a:hover { color: var(--gold); }
+.footer-site-link { display: grid; gap: 0.25rem; color: var(--text); text-decoration: none; }
+.footer-site-link span { color: rgba(246, 239, 228, 0.5); font-size: 0.72rem; }
+.footer-site-link:hover, .footer-site-link:hover span { color: var(--gold); }
 
 /* ==========================================================================
    Responsive

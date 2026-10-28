@@ -2,6 +2,8 @@
 
 A cinematic coffee-shop landing page built around a scroll-controlled sequence of existing image frames. The site uses a single global frame timeline, a responsive canvas, a searchable menu, and a lightweight local cart.
 
+**Live website:** [https://notparthyt.github.io/coffee-scrollytelling/](https://notparthyt.github.io/coffee-scrollytelling/)
+
 ## About
 
 The hero follows a visual journey from a cafe exterior through the interior and into coffee preparation. The frame folders are joined in order (`part1` through `part5`) into one sequence; frame numbering restarts inside each folder, but the playback index does not.
