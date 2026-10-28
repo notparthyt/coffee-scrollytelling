@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f0a08" />
     <meta
       name="description"
       content="Cinematic coffee story with scroll-driven frame playback and a refined menu."
@@ -11,26 +12,47 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Optional: buttery smooth wheel scrolling. The site works fine if this fails to load. -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" defer></script>
+    <script>
+      document.documentElement.classList.add('js', 'is-loading');
+      // Safety net: never leave the visitor stuck behind the loader if the main script fails.
+      setTimeout(function () {
+        document.documentElement.classList.remove('is-loading');
+        var l = document.getElementById('loader');
+        if (l) l.classList.add('is-done');
+      }, 12000);
+    </script>
+    <noscript><style>.loader{display:none}html.is-loading{overflow:auto}</style></noscript>
   </head>
   <body>
+    <div id="loader" class="loader" role="status" aria-live="polite">
+      <div class="loader-inner">
+        <span class="brand-mark loader-mark">M</span>
+        <p class="loader-title">More Than Coffee</p>
+        <div class="loader-bar"><span id="loader-bar"></span></div>
+        <p class="loader-count"><span id="loader-count">0</span>%</p>
+      </div>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+
     <header class="site-header">
-      <div class="brand-wrap">
+      <a class="brand-wrap" href="#hero" aria-label="More Than Coffee — back to top">
         <span class="brand-mark">M</span>
         <span class="brand-name">More Than Coffee</span>
-      </div>
+      </a>
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="#story">Story</a>
         <a href="#craft">Craft</a>
         <a href="#menu">Menu</a>
         <a href="#visit">Visit</a>
       </nav>
-      <button class="nav-cart" type="button" aria-label="Open cart">
+      <button class="nav-cart" type="button" aria-label="Open cart" aria-expanded="false" aria-controls="cart-panel">
         <span>Cart</span>
         <span class="cart-count" data-cart-count>0</span>
       </button>
@@ -39,113 +61,161 @@
     <main>
       <section id="hero" class="hero" aria-label="Cinematic coffee story">
         <div class="hero-canvas-shell">
-          <canvas id="cinematic-canvas" aria-label="Coffee story frames"></canvas>
+          <canvas id="cinematic-canvas" role="img" aria-label="Coffee story frames"></canvas>
+          <div class="hero-vignette" aria-hidden="true"></div>
 
-          <div class="hero-copy">
-            <p class="eyebrow">A little pause. A world of flavour.</p>
-            <h1>More than coffee.</h1>
-            <p class="hero-summary">Warm light, thoughtful craft, and the small rituals that make a day feel better.</p>
+          <!-- Story beats: data-start / data-end are scroll progress (0 → 1) through the hero. -->
+          <div class="beat beat--left beat--intro" data-start="-0.1" data-end="0.16">
+            <p class="eyebrow rise" style="--d:0">A little pause. A world of flavour.</p>
+            <h1 class="rise" style="--d:1">More than <em>coffee.</em></h1>
+            <p class="hero-summary rise" style="--d:2">
+              Warm light, thoughtful craft, and the small rituals that make a day feel better.
+            </p>
           </div>
 
-          <div id="coffee-overlay" class="coffee-overlay" aria-live="polite">
+          <div class="beat beat--right" data-start="0.2" data-end="0.4" aria-hidden="true">
+            <p class="eyebrow">01 — The room</p>
+            <h2>Warm light, <em>natural</em> wood.</h2>
+          </div>
+
+          <div class="beat beat--left" data-start="0.44" data-end="0.64" aria-hidden="true">
+            <p class="eyebrow">02 — The bar</p>
+            <h2>Precision <em>without</em> noise.</h2>
+          </div>
+
+          <div class="beat beat--right" data-start="0.68" data-end="0.84" aria-hidden="true">
+            <p class="eyebrow">03 — The pour</p>
+            <h2>Velvet crema, finished with <em>intention.</em></h2>
+          </div>
+
+          <div id="coffee-overlay" class="beat beat--center" data-start="0.88" data-end="1.4" aria-hidden="true">
             <div class="overlay-card">
               <p class="eyebrow">The ritual continues</p>
-              <h2>Crafted for slow, beautiful mornings.</h2>
+              <h2>Crafted for slow, <em>beautiful</em> mornings.</h2>
               <p>
                 A precise pour. A gentle crema. A room that feels like it was made for staying a while.
               </p>
             </div>
           </div>
+
+          <div class="scroll-cue" aria-hidden="true">
+            <span>Scroll</span>
+            <i></i>
+          </div>
+          <div class="progress-rail" aria-hidden="true"><span></span></div>
         </div>
       </section>
 
-      <section id="story" class="story-section chapter">
-        <div class="section-label">Chapter 01</div>
-        <div class="chapter-grid">
-          <div>
-            <p class="eyebrow accent">The atmosphere</p>
-            <h2>Your moment starts here.</h2>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>The beans</span><i></i><span>The grind</span><i></i><span>The pour</span><i></i><span>The rhythm</span><i></i>
+          <span>The beans</span><i></i><span>The grind</span><i></i><span>The pour</span><i></i><span>The rhythm</span><i></i>
+          <span>The beans</span><i></i><span>The grind</span><i></i><span>The pour</span><i></i><span>The rhythm</span><i></i>
+          <span>The beans</span><i></i><span>The grind</span><i></i><span>The pour</span><i></i><span>The rhythm</span><i></i>
+        </div>
+      </div>
+
+      <section id="story" class="chapter">
+        <div class="chapter-inner">
+          <span class="chapter-num" data-reveal>01</span>
+          <div class="chapter-grid">
+            <div data-reveal>
+              <p class="eyebrow accent">The atmosphere</p>
+              <h2>Your moment <em>starts</em> here.</h2>
+            </div>
+            <p data-reveal style="--d:1">
+              Lean into the room, the natural wood, the warm light, and the hush of a place designed for unhurried conversation.
+            </p>
           </div>
-          <p>
-            Lean into the room, the natural wood, the warm light, and the hush of a place designed for unhurried conversation.
-          </p>
         </div>
       </section>
 
-      <section id="craft" class="story-section chapter alt">
-        <div class="section-label">Chapter 02</div>
-        <div class="chapter-grid">
-          <div>
-            <p class="eyebrow accent">The craft</p>
-            <h2>Crafted with intention.</h2>
+      <section id="craft" class="chapter alt">
+        <div class="chapter-inner">
+          <span class="chapter-num" data-reveal>02</span>
+          <div class="chapter-grid">
+            <div data-reveal>
+              <p class="eyebrow accent">The craft</p>
+              <h2>Crafted with <em>intention.</em></h2>
+            </div>
+            <p data-reveal style="--d:1">
+              Every detail matters — the beans, the grind, the pour, the rhythm of the bar. Precision without noise.
+            </p>
           </div>
-          <p>
-            Every detail matters — the beans, the grind, the pour, the rhythm of the bar. Precision without noise.
-          </p>
         </div>
       </section>
 
-      <section class="story-section chapter">
-        <div class="section-label">Chapter 03</div>
-        <div class="chapter-grid">
-          <div>
-            <p class="eyebrow accent">The perfect pour</p>
-            <h2>Every detail matters.</h2>
+      <section class="chapter">
+        <div class="chapter-inner">
+          <span class="chapter-num" data-reveal>03</span>
+          <div class="chapter-grid">
+            <div data-reveal>
+              <p class="eyebrow accent">The perfect pour</p>
+              <h2>Every <em>detail</em> matters.</h2>
+            </div>
+            <p data-reveal style="--d:1">
+              Velvet crema, balanced sweetness, and a cup finished with intention. It is the kind of detail that makes a simple pause feel complete.
+            </p>
           </div>
-          <p>
-            Velvet crema, balanced sweetness, and a cup finished with intention. It is the kind of detail that makes a simple pause feel complete.
-          </p>
         </div>
       </section>
 
-      <section class="story-section chapter alt">
-        <div class="section-label">Chapter 04</div>
-        <div class="chapter-grid">
-          <div>
-            <p class="eyebrow accent">The coffee moment</p>
-            <h2>Make time for yourself.</h2>
+      <section class="chapter alt">
+        <div class="chapter-inner">
+          <span class="chapter-num" data-reveal>04</span>
+          <div class="chapter-grid">
+            <div data-reveal>
+              <p class="eyebrow accent">The coffee moment</p>
+              <h2>Make <em>time</em> for yourself.</h2>
+            </div>
+            <p data-reveal style="--d:1">
+              Whether it is a quick reset or a longer ritual, the right cup can transform a day without asking for much at all.
+            </p>
           </div>
-          <p>
-            Whether it is a quick reset or a longer ritual, the right cup can transform a day without asking for much at all.
-          </p>
         </div>
       </section>
 
       <section id="menu" class="menu-section">
-        <div class="menu-header">
+        <div class="menu-header" data-reveal>
           <div>
             <p class="eyebrow accent">Chapter 05</p>
-            <h2>Discover the menu</h2>
+            <h2>Discover the <em>menu</em></h2>
           </div>
           <div class="menu-controls">
             <div class="search-wrap">
               <label class="sr-only" for="menu-search">Search menu</label>
-              <input id="menu-search" type="search" placeholder="Search drinks" />
+              <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                <path d="m16 16 4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+              <input id="menu-search" type="search" placeholder="Search drinks" autocomplete="off" />
             </div>
           </div>
         </div>
 
-        <div class="filter-bar" id="filter-bar" aria-label="Coffee categories"></div>
+        <div class="filter-bar" id="filter-bar" aria-label="Coffee categories" data-reveal></div>
         <div id="product-grid" class="product-grid" aria-live="polite"></div>
       </section>
 
       <section id="visit" class="visit-section">
-        <div class="visit-card">
+        <div class="visit-card" data-reveal>
           <p class="eyebrow accent">Visit us</p>
-          <h2>Take a quiet break.</h2>
+          <h2>Take a quiet <em>break.</em></h2>
           <p>
             The café experience is best enjoyed in person. Slow coffee, warm light, and gentle conversation — all waiting for your next pause.
           </p>
+          <a class="btn-ghost" href="#menu">Browse the menu</a>
         </div>
       </section>
     </main>
 
-    <aside id="cart-panel" class="cart-panel" aria-label="Shopping cart">
+    <div id="cart-backdrop" class="cart-backdrop" aria-hidden="true"></div>
+    <aside id="cart-panel" class="cart-panel" aria-label="Shopping cart" aria-hidden="true">
       <div class="cart-header">
         <h3>Your order</h3>
         <button type="button" class="close-cart" aria-label="Close cart">×</button>
       </div>
-      <div id="cart-items" class="cart-items"></div>
+      <div id="cart-items" class="cart-items" data-lenis-prevent></div>
       <div class="cart-summary">
         <div>
           <span>Subtotal</span>
@@ -154,9 +224,23 @@
       </div>
     </aside>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <footer class="site-footer">
-      <div>More Than Coffee</div>
-      <div>Freshly poured, thoughtfully served.</div>
+      <div class="footer-intro">
+        <a class="footer-brand" href="#hero">More Than Coffee</a>
+        <p>Freshly poured, thoughtfully served.</p>
+      </div>
+      <div class="footer-credit">
+        <span class="footer-label">Created by</span>
+        <a href="https://www.instagram.com/notparthyt/" target="_blank" rel="noopener noreferrer">@notparthyt</a>
+      </div>
+      <nav class="footer-socials" aria-label="Creator social links">
+        <a href="https://www.instagram.com/notparthyt/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://discord.com/" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a href="https://www.youtube.com/@notparthyt" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </nav>
+      <a class="footer-top" href="#hero">Back to top ↑</a>
     </footer>
 
     <script type="module" src="./js/main.js"></script>
